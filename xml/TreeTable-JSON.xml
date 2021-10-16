@@ -1,0 +1,126 @@
+<mvc:View controllerName="com.agel.mmts.consumptionreservation.controller.ConsumptionReservationPage" height="100%"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:ui="sap.ui.table"
+    xmlns:fm="sap.ui.layout.form"
+    xmlns:f="sap.f">
+    <f:DynamicPage showFooter="true" headerExpanded="true" busy="{objectViewModel>/busy}">
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title id="pageTitle" text="Create Consumption Reservation"/>
+                </f:heading>
+                <f:actions>
+                    <HBox visible="{= ${objectViewModel>/isItemFieldsVisible} ? true : false}">
+                        <Button text="Save" id="idBtnSave" class="sapUiTinyMarginBegin" press="onSubmitReservation" type="Emphasized" />
+                        <Button text="Reset" class="sapUiTinyMarginBegin" press="onCancelReservation" />
+                    </HBox>
+                    <!-- <Button text="Raise Return Material Request" press="onConfirmRequest" type="Emphasized"/> -->
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <Toolbar>
+                        <ToolbarSpacer />
+                        <Button visible="{= ${objectViewModel>/isButtonVisible} ? true : false}" text="Go" type="Emphasized" press="onPressGo"/>
+                    </Toolbar>
+
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <!-- DynamicPage Content -->
+        <f:content>
+            <VBox>
+                <ui:TreeTable visible="{= ${objectViewModel>/isItemFieldsVisible} ? true : false}" id="TreeTable" rows="{path:'TreeDataModel>/', parameters: {numberOfExpandedLevels: 2,arrayNames:['results']}}" selectionMode="None" enableSelectAll="false" ariaLabelledBy="title" rowsUpdated="onRowsUpdated">
+                    <ui:columns>
+                        <ui:Column width="8%" hAlign="Center">
+                            <Label text="{i18n>Select}" />
+                            <ui:template>
+                                <CheckBox visible="{= ${TreeDataModel>isParent} ? true : false}" selected="{TreeDataModel>isSelected}" select="onSelectionOfRow" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>ReservationNo}" />
+                            <ui:template>
+                                <Text text="{TreeDataModel>ReservationNumber}" wrapping="false" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>MaterialDocumentNumber}" />
+                            <ui:template>
+                                <Text text="{TreeDataModel>MaterialDocumentNumber}" wrapping="false" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>MaterialDocumentYear}" />
+                            <ui:template>
+                                <Text text="{TreeDataModel>MaterialDocumentYear}" wrapping="false" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>MaterialCode}" />
+                            <ui:template>
+                                <Text text="{TreeDataModel>MaterialCode}" wrapping="false" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>Plant}" />
+                            <ui:template>
+                                <Text text="{TreeDataModel>Plant}" wrapping="false" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>Description}" />
+                            <ui:template>
+                                <Text text="{TreeDataModel>Description}" wrapping="false" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>StorageLocation}" />
+                            <ui:template>
+                                <Text text="{TreeDataModel>StorageLocation}" wrapping="false" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>IssuedQuantity}" />
+                            <ui:template>
+                                <Text text="{TreeDataModel>IssuedQty}" wrapping="false" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>BalancedQuantity}" />
+                            <ui:template>
+                                <Text text="{TreeDataModel>BalanceQty}" wrapping="false" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>ReservedQuantity}" />
+                            <ui:template>
+                                <Input liveChange="onLiveChangeReservedQty" visible="{= ${TreeDataModel>isParent} ? true : false}" value="{TreeDataModel>Quantity}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column>
+                            <Label text="{i18n>Status}" />
+                            <ui:template>
+                                <ObjectStatus text="{TreeDataModel>Status}" state="{= ${TreeDataModel>Status} === 'ISSUED' ? 'Success' : ${Status} === 'RESERVED FOR ISSUE' ? 'Information' : 'Error'}" visible="{= ${Status}.length>0 ? true : false }"/>
+                            </ui:template>
+                        </ui:Column>
+                    </ui:columns>
+                </ui:TreeTable>
+            </VBox>
+        </f:content>
+        <!-- <f:footer>
+            <OverflowToolbar visible="{= ${objectViewModel>/isItemFieldsVisible} ? true : false}">
+                <ToolbarSpacer/>
+                <Button text="Save" class="sapUiTinyMarginBegin" press="onSubmitReservation" type="Emphasized" />
+                <Button text="Cancel" class="sapUiTinyMarginBegin" press="onCancelReservation" />
+            </OverflowToolbar>
+        </f:footer> -->
+    </f:DynamicPage>
+</mvc:View>

@@ -1,0 +1,73 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns="sap.m" controllerName="com.agel.mmts.vendorPersona.view.blocks.poDetails.inspectionTable.InspectionTableController">
+
+    <smartTable:SmartTable class="sapUiSizeCompact" id="idPackingListTable" editable="false" placeToolbarInTable="true" enableAutoBinding="true" entitySet="PurchaseOrderSet" tableBindingPath="InspectionCalls" showFullScreenButton="true" showRowCount="false" tableType="ResponsiveTable" demandPopin="false" useExportToExcel="false" useTablePersonalisation="true" useVariantManagement="false" beforeRebindTable="onBeforeRebindInspectionTable" enableAutoColumnWidth="true" ignoreFromPersonalisation="CreatedBy,ID,IsArchived,PONumber,UpdatedAt,UpdatedBy">
+
+        <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+                <ToolbarSpacer/>
+                <Button text="Offline inspection raised?" press="onOfflineInspectionPress"></Button>
+            </OverflowToolbar>
+        </smartTable:customToolbar>
+
+        <Table sticky="ColumnHeaders,HeaderToolbar">
+            <columns>
+                <Column >
+                    <customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "Notification, OfflineInspectionCallId", "leadingProperty": "Notification, OfflineInspectionCallId" ,
+                                                 "columnIndex": 0 }'/>
+                    </customData>
+                    <Text text="{i18n>inspectionNumber}"/>
+                </Column>
+
+                <Column demandPopin="true" minScreenWidth="Tablet">
+                    <customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "InspectionDate", "leadingProperty": "InspectionDate",
+                                                 "columnIndex": 1 ,"sortProperty": "InspectionDate"}'/>
+                    </customData>
+                    <Text text="{i18n>inspectionDate}"/>
+                </Column>
+
+                <Column demandPopin="true" minScreenWidth="Tablet">
+                    <customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "RaisedOfflineInspectionDate", "leadingProperty": "RaisedOfflineInspectionDate",
+                                                 "columnIndex": 2 ,"sortProperty": "RaisedOfflineInspectionDate"}'/>
+                    </customData>
+                    <Text text="{i18n>RaisedOfflineInspectionDate}"/>
+                </Column>
+
+                <Column demandPopin="true" minScreenWidth="Tablet">
+                    <customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "Comments", "leadingProperty": "Comments",
+                                                 "columnIndex": 3,"sortProperty": "Comments","filterProperty": "Comments"}'/>
+                    </customData>
+                    <Text text="{i18n>comments}"/>
+                </Column>
+            </columns>
+            <items>
+
+                <ColumnListItem type="Navigation" press="onInspectionIDPress">
+                    <cells>
+                        <ObjectIdentifier title="{= ${Notification}!== '0' ? ${Notification} : ${OfflineInspectionCallId}}" />
+                        <Text text="{path:'InspectionDate',
+                                    type: 'sap.ui.model.type.Date',
+				                     formatOptions: {
+				                        pattern: 'MMMM dd, yyyy'
+				                     }    
+                        }"/>
+                        <Text text="{path:'RaisedOfflineInspectionDate',
+                                    type: 'sap.ui.model.type.Date',
+				                     formatOptions: {
+				                        pattern: 'MMMM dd, yyyy'
+				                     }    
+                        }"/>
+                        <Text text="{Comments}"/>
+                    </cells>
+                </ColumnListItem>
+
+            </items>
+        </Table>
+    </smartTable:SmartTable>
+</mvc:View>

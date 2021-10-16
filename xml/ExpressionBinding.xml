@@ -1,0 +1,19 @@
+
+<!--Multiple values Expression Binding -->
+
+          Ex 1:
+
+<CheckBox    visible="{= ${consumptionPostedData>Status} === 'CONSUMPTION SUCCESSFUL' ? true : ${consumptionPostedData>Status} === 'CANCELLATION FAILED' ? true : false }"  selected="{consumptionPostedData>isSelected}" select="onSelectionOfRow" />
+
+          Ex 2:
+
+<Button visible="{= ${Status} === 'CONSUMPTION SUCCESSFUL' ? true : ${Status} === 'CANCELLATION FAILED' ? true : ${Status} === 'PARTIALLY CANCELLED' ? true : false }" text="Cancel consumption posting" press="onPressCancelConsumptionPosting" type="Emphasized"/>
+
+
+<!--Object Status-->
+
+
+<ObjectStatus text="{consumptionPostedData>Status}" state="{= ${consumptionPostedData>Status} === 'CONSUMPTION SUCCESSFUL' ? 'Success' : ${Status} === 'CONSUMPTION CANCELLED' ? 'Information' : 'Error'}" visible="{= ${Status}.length>0 ? true : false }"/>
+
+
+
