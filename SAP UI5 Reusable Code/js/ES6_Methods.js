@@ -9,6 +9,7 @@ PrintDocumentService: function (result) {
             result.forEach((item) => {
                 var sContent = that.callPrintDocumentService({
                     RequestNo: item.RequestNo
+                            
                 })
                 sContent.then(function (val) {
                     item.Content = val
