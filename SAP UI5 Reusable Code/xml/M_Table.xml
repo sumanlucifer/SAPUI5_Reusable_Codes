@@ -1,0 +1,61 @@
+                        <VBox renderType="Bare">
+                            <Table id="idInspectedParentLineItems" width="auto" items="{InspectedParentItems}" noDataText="{i18n>noParentItems}" growing="true" growingScrollToLoad="true" fixedLayout="false">
+                                <headerToolbar>
+                                    <OverflowToolbar>
+                                        <ToolbarSpacer  />
+                                        <SearchField tooltip="{i18n>searchItem}" placeholder="{i18n>searchItem}" visible="false">
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow" group="1"/>
+                                            </layoutData>
+                                        </SearchField>
+                                        <Button tooltip="{i18n>sort}" icon="sap-icon://sort" press="handleSortButtonPressed" type="Transparent" visible="false"/>
+                                        <Button tooltip="{i18n>filter}" icon="sap-icon://filter" press="handleFilterButtonPressed" type="Transparent" visible="false"/>
+                                        <Button press=".onExportParentItemsExportPress" icon="sap-icon://download" visible="false"/>
+                                        <!--                                        <Button text="Create Packing List" type="Emphasized" enabled="{= %{mdcc} ? true : false || %{attachments/0/file} ? true: false}" press="onCreatePackingListPress" /> -->
+                                        <!--                                        <Button text="Generate QR Code" type="Emphasized" binding="{qrCodeModel>/generateQRCode(...)}" press=".onGenerateQRCodePress"/> -->
+                                    </OverflowToolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column>
+                                        <Text text="{i18n>lineNumber}"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>materialCode}"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>name}"/>
+                                    </Column>
+                                    <Column demandPopin="true" minScreenWidth="Desktop">
+                                        <Text text="{i18n>description}"/>
+                                    </Column>
+                                    <Column demandPopin="true" minScreenWidth="Desktop">
+                                        <Text text="{i18n>actions}"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>qty}"/>
+                                    </Column>
+                                    <Column hAlign="Center">
+                                        <Text text="{i18n>mdccApprovedQty}"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>uom}"/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem type="Active">
+                                        <cells>
+                                            <ObjectIdentifier title="{LineNumber}"/>
+                                            <ObjectIdentifier title="{MaterialCode}"/>
+                                            <Text text="{Name}"/>
+                                            <ExpandableText text="{Description}" maxCharacters="32" overflowMode="Popover"/>
+
+
+                                            <Link text="{i18n>MapBOQItems}" press="onViewInspectionItemsPress"></Link>
+                                            <Text text="{Qty}"/>
+                                            <Text text="{MDCCApprovedQty}"/>
+                                            <Text text="{UOM}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
